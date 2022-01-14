@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_190853) do
+ActiveRecord::Schema.define(version: 2022_01_14_174858) do
 
   create_table "tweets", force: :cascade do |t|
     t.string "type"
@@ -18,8 +18,17 @@ ActiveRecord::Schema.define(version: 2022_01_13_190853) do
     t.integer "reply_to_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_tweets_on_author_id"
     t.index ["reply_to_id"], name: "index_tweets_on_reply_to_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "tweets", "tweets", column: "reply_to_id"
+  add_foreign_key "tweets", "users", column: "author_id"
 end
