@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+user = User.create!(name: "HogeHoge")
+tweet = NormalTweet.create!(text: "Hello twitter!", author: user)
+Reply.create!(text: "hi", reply_to: tweet, author: user)
